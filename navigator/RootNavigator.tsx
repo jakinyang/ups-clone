@@ -12,13 +12,13 @@ export type RootStackParamList = {
   Modal: { userId: string; name: string; }
   Order: { order: any }
 }
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  const RootStack = createNativeStackNavigator();
   return (
     <RootStack.Navigator>
       <RootStack.Group>
-        <RootStack.Screen name='Main' component={TabNavigator} />
+        <RootStack.Screen name='Main' component={TabNavigator} options={{headerShown: false}} />
       </RootStack.Group>
     </RootStack.Navigator>
   )
