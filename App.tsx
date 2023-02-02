@@ -5,15 +5,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Components
 import { CustomersScreen } from './screens/CustomersScreen';
+import { RootNavigator } from './navigator/RootNavigator';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='CustomersScreen' component={CustomersScreen}/>
-      </Stack.Navigator>
+      <RootNavigator />
     </NavigationContainer>
   );
 }
