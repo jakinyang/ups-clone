@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_CUSTOMERS, GET_ORDERS } from '../graphql/queries'
 
-export function useCustomerOrders() {
+export function useOrders() {
   const { loading, error, data } = useQuery(GET_ORDERS);
   const [orders, setOrders] = useState<Order[]>([])
 
@@ -14,7 +14,7 @@ export function useCustomerOrders() {
       createdAt: value.createdAt,
       shippingCost: value.shippingCost,
       trackingId: value.trackingId,
-      trackingItems: value.trackingItems,
+      TrackingItems: value.TrackingItems,
       Lat: value.Lat,
       Lng: value.Lng,
       Address: value.Address,

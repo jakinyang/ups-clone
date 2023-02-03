@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { CustomersScreen } from '../screens/CustomersScreen';
 import { TabNavigator } from './TabNavigator';
 import { ModalScreen } from '../screens/ModalScreen';
+import { OrderScreen } from '../screens/OrderScreen';
 
 // Type Def
 export type RootStackParamList = {
@@ -29,6 +30,16 @@ export function RootNavigator() {
         <RootStack.Screen
           name='Modal'
           component={ModalScreen}
+          options={{ 
+            headerShown: false,
+            presentation: "modal" 
+          }}
+        />
+      </RootStack.Group>
+      <RootStack.Group>
+        <RootStack.Screen
+          name='Order'
+          component={OrderScreen}
           options={{ 
             headerShown: false,
             presentation: "modal" 
