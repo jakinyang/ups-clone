@@ -14,10 +14,15 @@ type TrackingItems {
     )
 }
 
+type TrackingItemsList {
+  name: ID
+  value: TrackingItems
+}
+
 
 
 type Query {
-  getTrackingItems: [TrackingItems!]
+  getTrackingItems: [TrackingItemsList]
     @rest(
       endpoint: "https://ups-clone-bde53-default-rtdb.firebaseio.com/trackingItems.json"
       transforms: [{ pathpattern: [], editor: "objectToArray" }]
