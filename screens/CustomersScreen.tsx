@@ -43,9 +43,14 @@ export function CustomersScreen() {
         onChangeText={setInput}
         containerStyle={{ backgroundColor: "white", paddingTop: 5, paddingBottom: 0, paddingHorizontal: 30 }}
       />
-      {data?.getCustomers.map(({ name: ID, value: { email, name } }: CustomerResponse) => (
-        <CustomerCard key={ID} email={email} userId={ID} name={name}/>
-      ))}
+      {data?.getCustomers?.filter(
+        (customer: CustomerList) => customer.value.name.includes(input)
+      )
+        .map(
+          ({ name: ID, value: { email, name } }: CustomerResponse) => (
+            <CustomerCard key={ID} email={email} userId={ID} name={name} />
+          )
+        )}
     </ScrollView>
   )
 }
