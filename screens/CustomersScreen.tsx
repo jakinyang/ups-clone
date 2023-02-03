@@ -8,6 +8,9 @@ import { Input } from '@rneui/themed'
 // Type Params
 import { TabStackParamList } from '../navigator/TabNavigator';
 import { RootStackParamList } from '../navigator/RootNavigator';
+import { useQuery } from '@apollo/client';
+import { GET_CUSTOMERS } from '../graphql/queries';
+import { CustomerCard } from '../components/CustomerCard';
 
 export type CustomerScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<TabStackParamList, 'Customers'>,
@@ -16,7 +19,7 @@ export type CustomerScreenNavigationProp = CompositeNavigationProp<
 
 export function CustomersScreen() {
   const [input, setInput] = useState<string>("")
-
+  const { loading, error, data } = useQuery(GET_CUSTOMERS);
   const navigation = useNavigation<CustomerScreenNavigationProp>();
 
 
@@ -30,19 +33,19 @@ export function CustomersScreen() {
     <ScrollView
       className='bg-[#59C1CC]'
     >
-      <Image 
-        source={{uri: "https://links.papareact.com/3jc"}}
+      <Image
+        source={{ uri: "https://links.papareact.com/3jc" }}
         className="w-full h-64"
       />
-      <Input 
+      <Input
         placeholder='Search by Customer'
         value={input}
         onChangeText={setInput}
-        containerStyle={{backgroundColor: "white", paddingTop: 5, paddingBottom: 0, paddingHorizontal: 30}}
+        containerStyle={{ backgroundColor: "white", paddingTop: 5, paddingBottom: 0, paddingHorizontal: 30 }}
       />
-      <View className='flex-1 items-center justify-center'>
-        <Text className='text-lg font-semibold text-white'>CustomersScreen</Text>
-      </View>
+      {data?.getCustomers.map(({ name: ID, value: { email, name } }: CustomerResponse) => (
+        <CustomerCard key={ID} email={email} userId={ID} name={name}/>
+      ))}
     </ScrollView>
   )
 }

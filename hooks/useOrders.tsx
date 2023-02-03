@@ -1,14 +1,14 @@
+import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_ORDERS } from '../graphql/queries'
+import { GET_CUSTOMERS, GET_ORDERS } from '../graphql/queries'
 
-export function useCustomerOrders(userId: string) {
+export function useCustomerOrders() {
   const { loading, error, data } = useQuery(GET_ORDERS);
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
     if (!data) return;
-
     const orders: Order[] = data.getOrders.map(({ value }: OrderResponse) => ({
       carrier: value.carrier,
       createdAt: value.createdAt,
@@ -19,10 +19,9 @@ export function useCustomerOrders(userId: string) {
       Lng: value.Lng,
       Address: value.Address,
       City: value.City,
-    }))
-    const customerOrders = orders.filter((order) => order.trackingItems.customer_id === userId)
-    setOrders(customerOrders);
-  }, [data, userId])
-
+    }));
+    setOrders(orders);
+  }, [data])
+  
   return { loading, error, orders }
 }
