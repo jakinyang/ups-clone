@@ -14,13 +14,13 @@ export function useCustomerOrders(userId: string) {
       createdAt: value.createdAt,
       shippingCost: value.shippingCost,
       trackingId: value.trackingId,
-      trackingItems: value.trackingItems,
+      TrackingItems: value.TrackingItems,
       Lat: value.Lat,
       Lng: value.Lng,
       Address: value.Address,
       City: value.City,
     }))
-    const customerOrders = orders.filter((order) => order.trackingItems.customer_id === userId)
+    const customerOrders = orders.filter((order) => order.TrackingItems.customer_id === userId)
     setOrders(customerOrders);
   }, [data, userId])
 
